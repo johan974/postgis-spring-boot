@@ -26,10 +26,7 @@ public class CityController {
 	}
 	
 	@GetMapping("{lat}/{lon}/{distanceM}")
-	public List<City> getCityNear(
-			@PathVariable double lat, 
-			@PathVariable double lon, 
-			@PathVariable double distanceM){
+	public List<City> getCityNear( @PathVariable double lat, @PathVariable double lon, @PathVariable double distanceM){
 		return service.findAround(lat, lon, distanceM);
 	}
 	

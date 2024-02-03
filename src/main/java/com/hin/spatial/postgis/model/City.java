@@ -4,9 +4,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
-import com.vividsolutions.jts.geom.Point;
-
 import lombok.Data;
+import org.locationtech.jts.geom.Point;
 
 @Data
 @Entity(name = "us_cities")
@@ -16,13 +15,16 @@ public class City {
 	@Column(name="id")
 	private long id;
 	
-	@Column(name="`POP_2010`")
+	@Column(name="pop_2010")
 	private long population2010;
 	
-	@Column(name="`ELEV_IN_FT`")
+	@Column(name="elev_in_ft")
 	private long altitude;
-	
-	@Column(columnDefinition = "geometry(Point,4326)")
+
+	@Column(name="state")
+	private String state;
+
+	@Column(name="wkb_geometry",columnDefinition = "geometry(Point,4326)")
 	private Point geom;
 
 }

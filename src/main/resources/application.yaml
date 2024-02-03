@@ -5,7 +5,7 @@ spring:
   # Database configuration
   datasource:
     driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5435}/${DB_NAME:postgis}
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5433}/${DB_NAME:postgis}
     username: ${DB_USER:postgis}
     password: ${DB_PASSWORD:postgis}
   # JPA configuration  
@@ -16,7 +16,8 @@ spring:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     # This should no longer be needed with Hibernate 6
-    database-platform: org.hibernate.spatial.dialect.postgis.PostgisPG10Dialect
+    # deprecated: database-platform: org.hibernate.spatial.dialect.postgis.PostgisPG10Dialect
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
     database: postgresql
     # PotGIS configuration
