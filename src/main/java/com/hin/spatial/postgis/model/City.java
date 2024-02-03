@@ -24,7 +24,7 @@ public class City {
 	@Column(name="state")
 	private String state;
 
-	@Column(name="wkb_geometry",columnDefinition = "geometry(Point,4326)")
+	@Column(columnDefinition = "geometry(Point,4326)")
 	private Point geom;
 
 }
