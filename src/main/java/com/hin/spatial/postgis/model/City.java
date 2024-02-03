@@ -1,11 +1,11 @@
 package com.hin.spatial.postgis.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-
 import lombok.Data;
 import org.locationtech.jts.geom.Point;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Data
 @Entity(name = "us_cities")
@@ -24,7 +24,8 @@ public class City {
 	@Column(name="state")
 	private String state;
 
-	@Column(columnDefinition = "geometry(Point,4326)")
+	// @Column(name = "wkb_geometry", columnDefinition = "geometry(Point,4326)")
+	@Column(name = "wkb_geometry")
 	private Point geom;
 
 }

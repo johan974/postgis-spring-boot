@@ -16,17 +16,18 @@ spring:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     # This should no longer be needed with Hibernate 6
-    # deprecated: database-platform: org.hibernate.spatial.dialect.postgis.PostgisPG10Dialect
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    database-platform: org.hibernate.spatial.dialect.postgis.PostgisDialect
+#    database-platform: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
 
     database: postgresql
     # PotGIS configuration
     properties:
       hibernate:
-        jdbc:
-          lob:
-            non_contextual_creation: true
+#        jdbc:
+#          lob:
+#            non_contextual_creation: true
+        dialect: org.hibernate.spatial.dialect.postgis.PostgisDialect
 logging:
   level:
     org.hibernate.type.descriptor.sql: trace
