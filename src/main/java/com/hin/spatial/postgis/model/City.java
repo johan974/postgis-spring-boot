@@ -1,5 +1,6 @@
 package com.hin.spatial.postgis.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.locationtech.jts.geom.Point;
 
@@ -24,8 +25,8 @@ public class City {
 	@Column(name="state")
 	private String state;
 
-	// @Column(name = "wkb_geometry", columnDefinition = "geometry(Point,4326)")
-	@Column(name = "wkb_geometry")
+	@JsonIgnore
+	@Column(name = "wkb_geometry", columnDefinition = "geometry(Point,4326)")
 	private Point geom;
 
 }

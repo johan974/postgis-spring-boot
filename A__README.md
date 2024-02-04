@@ -38,7 +38,7 @@ mvn spring-boot:run
 
 ### Test the REST API
 
-Open your browser at <http://localhost:8980/city/48.232509500000106/-101.29627319999997/200000>
+Open your browser at <http://localhost:8980/cities/48.232509500000106/-101.29627319999997/200000>
 
 
 - 1st parameter: latitude in degree

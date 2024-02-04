@@ -1,5 +1,6 @@
 package com.hin.spatial.postgis.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.locationtech.jts.geom.*;
 
 import javax.persistence.Column;
@@ -32,6 +33,7 @@ public class SpatialLab implements Serializable {
     @Column( name = "multipolygon")
     private MultiPolygon multiPolygon;
 
+    @JsonIgnore
     @Column( name = "geometrycollection")
     private GeometryCollection geometryCollection;
 

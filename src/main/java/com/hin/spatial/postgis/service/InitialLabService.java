@@ -19,6 +19,7 @@ public class InitialLabService implements ApplicationListener<ApplicationReadyEv
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
+        log.info( "Filling one data row with all geo stuff ... ");
         if( spatialLabRepository.count() >= 1) {
             log.info( "There is already a spatial lab entity");
             return ;
@@ -28,6 +29,7 @@ public class InitialLabService implements ApplicationListener<ApplicationReadyEv
         GeometryFactory gf = new GeometryFactory();
 
         Point point = gf.createPoint( new Coordinate( 4, 5));
+        spatialLab.setId(123L);
         spatialLab.setPoint( point);
 
         Coordinate[] coordinates = new Coordinate[] { new Coordinate( 39, 33), new Coordinate( 46, 23)};
@@ -64,5 +66,6 @@ public class InitialLabService implements ApplicationListener<ApplicationReadyEv
         spatialLab.setGeometryCollection( geometryCollection);
 
         spatialLabRepository.save( spatialLab);
+        log.info( "Filled one data row with all geo stuff ... ");
     }
 }
