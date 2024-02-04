@@ -13,6 +13,7 @@ import com.hin.spatial.postgis.model.City;
 import com.hin.spatial.postgis.repo.CityRepository;
 import lombok.extern.slf4j.Slf4j;
 
+import static com.hin.spatial.postgis.utils.GeoUtils.createPoint;
 import static com.hin.spatial.postgis.utils.GeoUtils.createPolygon;
 
 @Service
@@ -29,12 +30,12 @@ public class CityService {
 		return repo.findAll(page);
 	}
 	
-	public List<City> findAround(double lat, double lon, double distanceM){
-		log.info("Looking for city around ({},{}) withing {} meters", lat, lon, distanceM);
-		Point p = factory.createPoint(new Coordinate(lon, lat));
-		List<City> cities = repo.findNearWithinDistance(p, distanceM);
-		return cities;
-	}
+//	public List<City> findAround(double lat, double lon, double distanceM){
+//		log.info("Looking for city around ({},{}) withing {} meters", lat, lon, distanceM);
+//		Point p = factory.createPoint(new Coordinate(lon, lat));
+//		List<City> cities = repo.findNearWithinDistance(p, distanceM);
+//		return cities;
+//	}
 
 	public List<City> findAround2(double lat, double lon, double distanceM){
 		log.info("Looking for city around ({},{}) withing {} meters", lat, lon, distanceM);
@@ -49,4 +50,19 @@ public class CityService {
 		List<City> cities = repo.findItemsIntersects(polygon);
 		return cities;
 	}
+
+	public List<City> findIntersects2(MyPolygonDto myPolygon){
+		Polygon polygon = createPolygon( myPolygon.getLowerLeftX(), myPolygon.getLowerLeftY(),
+				myPolygon.getUpperRightX(), myPolygon.getUpperRightY());
+		List<City> cities = repo.findItemsIntersects2(polygon);
+		return cities;
+	}
+
+	public List<City> findNearestCities(MyPolygonDto myPolygon, double distance){
+		Point point = createPoint( myPolygon.getLowerLeftX(), myPolygon.getLowerLeftY());
+		List<City> cities = repo.findNearWithinDistance(point, distance);
+		return cities;
+	}
+
+
 }

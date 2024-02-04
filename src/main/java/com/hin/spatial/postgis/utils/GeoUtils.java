@@ -15,4 +15,8 @@ public class GeoUtils {
                 new Coordinate( lowLeftX, lowLeftY)};
         return gf.createPolygon( gf.createLinearRing( polygonCoordinates));
     }
+
+    public static Point createPoint( double lowLeftX, double lowLeftY) {
+        return gf.createPoint( new Coordinate( lowLeftX, lowLeftY));
+    }
 }

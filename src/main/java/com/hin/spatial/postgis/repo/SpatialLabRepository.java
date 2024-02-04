@@ -11,6 +11,10 @@ import java.util.List;
 
 @Repository
 public interface SpatialLabRepository extends JpaRepository<SpatialLab, Long> {
-    @Query("Select s from SpatialLab s where intersects( s.polygon, :filter) = true")
+    //@Query("Select s from SpatialLab s where intersects( s.polygon, :filter) = true")
+    @Query("Select s from SpatialLab s where ST_intersects( s.polygon, :filter) = true")
     List<SpatialLab> findItemsIntersects(@Param("filter") Geometry filter);
+
+    @Query( "Select s from SpatialLab s where ST_DistanceSphere( s.polygon, :filter) < :distance")
+    List<SpatialLab> findNearWithinDistance( @Param("filter") Geometry filter, @Param("distance") Double distance);
 }
