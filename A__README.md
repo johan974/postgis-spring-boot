@@ -1,8 +1,12 @@
-### Spring Boot and PostGIS tutorial
+# Spring Boot and PostGIS tutorial
 
 This project demonstrate how you can use PostGIS and Spring Boot to manage spatial data
 
-#### Run PostGIS
+The project consists of 3 parts:
+- Cities - load from JSON and query;
+- SpatialLab - initial startup method ... inserts all possible geometries
+
+## Run PostGIS
 Take care: we take post 5433 iso 5432 !!!!
 ```
 See kubernetes postgis.yaml.
@@ -10,7 +14,7 @@ $ kubectl apply -f postgis.yaml
 ```
 Connect with DBeaver to the database 'localhost', postgis with u/p postgis/postgis. 
 
-### Install ogr2ogr
+## Install ogr2ogr
 Steps to install the ogr2ogr CLI: 
 - Check this video: https://www.youtube.com/watch?v=CDN9MRuuf9k.
 - Go to https://trac.osgeo.org/osgeo4w/ and then download "OSGeo4W network installer".
@@ -19,7 +23,7 @@ Steps to install the ogr2ogr CLI:
 - Check de installatie: open a command executor. $ ogrinfo
 - If you get a GDAL missing, add to your system path: c:\OSgeo4W64\bin. 
 
-### Load the Data
+## Load the City Data 
 
 ```
 ogr2ogr -f "PostgreSQL" PG:"dbname=postgis user=postgis host=localhost port=5433 password=postgis" "src/main/resources/us_cities.geojson" -sql "select cast(ID as INTEGER), ELEV_IN_FT, POP_2010, STATE from us_cities" -nln us_cities
@@ -55,3 +59,9 @@ This will return all the cities within the distance around the specified locatio
 psql -h localhost -p 5435 -d postgis -U postgis
 ```
 
+## Query using queryForList and insert with WKB (or WKT)
+- Base info: https://www.concretepage.com/spring/spring-jdbctemplate-queryforlist
+- Further: query a database via bgt-db-mig
+- Step 1: make the query: see part 1 of bgt
+- Step 2: insert in a second table: see part 2 of bgt
+- Step 3: compare via JTS (topoEquals)
