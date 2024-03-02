@@ -64,3 +64,4 @@ psql -h localhost -p 5435 -d postgis -U postgis
 - Insert via sql-statements. See the InitialLabService ... insertArcs!
 
 ## Spring Boot 3 - works!
+- No difference with WKB unknown type 8
