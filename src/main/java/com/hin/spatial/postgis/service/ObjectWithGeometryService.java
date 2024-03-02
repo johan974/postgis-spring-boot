@@ -25,4 +25,8 @@ public class ObjectWithGeometryService {
     public List<ObjectWithGeometry> findAll() {
         return objectWithGeometryJpaRepository.findAll();
     }
+
+    public ObjectWithGeometry findById( Long id) {
+        return objectWithGeometryJpaRepository.findById( id).orElse( null);
+    }
 }
