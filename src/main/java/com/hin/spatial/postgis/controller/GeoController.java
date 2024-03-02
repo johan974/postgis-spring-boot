@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import com.hin.spatial.postgis.model.City;
 import com.hin.spatial.postgis.service.CityService;
 
-import javax.websocket.server.PathParam;
-
 import static com.hin.spatial.postgis.utils.GeoUtils.createPolygon;
 
 @Slf4j

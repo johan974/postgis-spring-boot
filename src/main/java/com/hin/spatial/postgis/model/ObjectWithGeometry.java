@@ -1,9 +1,9 @@
 package com.hin.spatial.postgis.model;
 
+import jakarta.persistence.*;
 import lombok.Data;
 import org.locationtech.jts.geom.Geometry;
 
-import javax.persistence.*;
 import java.io.Serializable;
 
 @Data

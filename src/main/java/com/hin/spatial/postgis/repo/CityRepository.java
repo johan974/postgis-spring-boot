@@ -1,7 +1,6 @@
 package com.hin.spatial.postgis.repo;
 
 import com.hin.spatial.postgis.model.City;
-import com.hin.spatial.postgis.model.SpatialLab;
 import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.Point;
 import org.springframework.data.jpa.repository.JpaRepository;

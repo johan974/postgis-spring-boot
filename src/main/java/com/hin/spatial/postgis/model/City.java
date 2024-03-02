@@ -1,12 +1,11 @@
 package com.hin.spatial.postgis.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.Data;
 import org.locationtech.jts.geom.Point;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
 
 @Data
 @Entity(name = "us_cities")
