@@ -63,11 +63,19 @@ public class InitialLabService implements ApplicationListener<ApplicationReadyEv
                             """);
 
             // Dit verstoort de verwerking
-            log.info( "Step 4b: Insert EWKT without CurvedToLine: error Unsupported WKB type code: 8!");
-            objectWithGeometryService.executeSql("""
-            INSERT INTO objectwithgeometries (id,geometry,remarks) VALUES ( 4000, ST_GeomFromEWKT( 'CIRCULARSTRING(29.8925 41.36667,29.628611 41.015000,29.27528 41.31667)'), 'remark-3b');
-                            """);
-             List<ObjectWithGeometry> geoObjects = objectWithGeometryService.findAll();
+//            log.info( "Step 4b: Insert EWKT without CurvedToLine: error Unsupported WKB type code: 8!");
+//            objectWithGeometryService.executeSql("""
+//            INSERT INTO objectwithgeometries (id,geometry,remarks) VALUES ( 4000, ST_GeomFromEWKT( 'CIRCULARSTRING(29.8925 41.36667,29.628611 41.015000,29.27528 41.31667)'), 'remark-3b');
+//                            """);
+//
+//            try {
+//                List<ObjectWithGeometry> geoObjects = objectWithGeometryService.findAll();
+//            } catch (Exception e) {
+//                log.info( "KNOWN ERROR: WkbDecodeException: Unsupported WKB type code: 8");
+//                objectWithGeometryService.executeSql( "delete from objectwithgeometries where id = 4000");
+//            }
+
+
             // Will result in error:
             // Supported Geolatte WKB dialect types:
 //                final public static int WKB_POINT = 1;
@@ -152,9 +160,9 @@ public class InitialLabService implements ApplicationListener<ApplicationReadyEv
             // Object1.curvedToLine =exact= object8.lineStrings => false
 
             // REad EWKT
-            ObjectWithGeometry obj4000Ewkt = objectWithGeometryService.findById( 4000L);
-            log.info( "Object1.curvedToLine =topo*= objectEwkt.lineStrings => {}", obj1curvedToLine.getGeometry().equalsTopo( obj4000Ewkt.getGeometry()));
-            log.info( "Object1.curvedToLine =exact= objectEwkt.lineStrings => {}", obj1curvedToLine.getGeometry().equalsExact( obj4000Ewkt.getGeometry()));
+//            ObjectWithGeometry obj4000Ewkt = objectWithGeometryService.findById( 4000L);
+//            log.info( "Object1.curvedToLine =topo*= objectEwkt.lineStrings => {}", obj1curvedToLine.getGeometry().equalsTopo( obj4000Ewkt.getGeometry()));
+//            log.info( "Object1.curvedToLine =exact= objectEwkt.lineStrings => {}", obj1curvedToLine.getGeometry().equalsExact( obj4000Ewkt.getGeometry()));
 
         } catch (SQLException e) {
             e.printStackTrace();
