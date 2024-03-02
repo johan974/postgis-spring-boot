@@ -59,6 +59,8 @@ This will return all the cities within the distance around the specified locatio
 psql -h localhost -p 5435 -d postgis -U postgis
 ```
 
-## Part 3: Query using queryForList and insert with WKB (or WKT)
+## Part 3: Insert with dynamic insert statement
 - Base info: https://www.concretepage.com/spring/spring-jdbctemplate-queryforlist
 - Insert via sql-statements. See the InitialLabService ... insertArcs!
+
+## Spring Boot 3 - works!
