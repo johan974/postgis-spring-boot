@@ -38,8 +38,23 @@
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
-			<scope>runtime</scope>
+<!--		<scope>runtime</scope> it has limited access !! -->
 		</dependency>
+
+		<!-- Does not work: -->
+		<dependency>
+			<groupId>net.postgis</groupId>
+			<artifactId>postgis-jdbc</artifactId>
+			<version>2023.1.0</version>
+		</dependency>
+
+<!-- in a proprietary repo -->
+<!--	<dependency>-->
+<!--		<groupId>org.postgis</groupId>-->
+<!--		<artifactId>postgis</artifactId>-->
+<!--		<version>1.5.2</version>-->
+<!--	</dependency>-->
+
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>

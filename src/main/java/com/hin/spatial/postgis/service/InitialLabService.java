@@ -36,7 +36,7 @@ public class InitialLabService implements ApplicationListener<ApplicationReadyEv
     private void createArcs() {
         try {
             log.info( "Step 0: Delete all objects");
-            objectWithGeometryService.executeSql( "delete from objectwithgeometries ");
+            objectWithGeometryService.executeSql( "delete from objectwithgeometries where id < 10");
 
             log.info( "Step 1: Insert CurveToLine");
             objectWithGeometryService.executeSql("""
