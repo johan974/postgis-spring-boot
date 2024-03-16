@@ -5,6 +5,7 @@ import com.hin.spatial.postgis.model.SpatialLab;
 import com.hin.spatial.postgis.repo.SpatialLabRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.locationtech.jts.geom.*;
+import org.locationtech.jts.io.geojson.GeoJsonWriter;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.core.annotation.Order;
@@ -140,6 +141,8 @@ public class InitialLabService implements ApplicationListener<ApplicationReadyEv
             // Resultaten:
             // Object1.curvedToLine =topo*= object5.lineStrings => true
             // Object1.curvedToLine =exact= object5.lineStrings => true
+            GeoJsonWriter geoJsonWriter = new GeoJsonWriter();
+            log.info( "GeometryJSON: {}", geoJsonWriter.write( obj1curvedToLine.getGeometry()));
 
             log.info( "Object1.curvedToLine =topo*= object6.lineStrings => {}", obj1curvedToLine.getGeometry().equalsTopo( obj6WithMinimalChangeInLineStrings.getGeometry()));
             log.info( "Object1.curvedToLine =exact= object6.lineStrings => {}", obj1curvedToLine.getGeometry().equalsExact( obj6WithMinimalChangeInLineStrings.getGeometry()));
