@@ -18,4 +18,8 @@ public class QueryListByJdbcTemplate {
         return jdbcTemplate.queryForList( String.format( "select id,geometry,remarks from objectwithgeometries where id = %d", id));
     }
 
+    public List<Map<String, Object>> readDataGeometryAsText( int id) {
+        return jdbcTemplate.queryForList( String.format( "select id,ST_AsText(geometry),remarks from objectwithgeometries where id = %d", id));
+    }
+
 }

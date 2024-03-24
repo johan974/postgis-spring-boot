@@ -1,5 +1,11 @@
 # Spring Boot and PostGIS tutorial
 
+## Final result
+- Standalone 1 - does not work
+- Standalone 2 - does work
+- Spring JPA - when using a String version of the object, then you can process it with OsGeo GeoTools WktReader2. 
+
+## Project
 This project demonstrate how you can use PostGIS and Spring Boot to manage spatial data
 
 The project consists of 3 parts:

@@ -10,7 +10,14 @@ import com.hin.spatial.postgis.repo.QueryListByJdbcTemplate;
 import com.hin.spatial.postgis.repo.SpatialLabRepository;
 import lombok.extern.slf4j.Slf4j;
 import net.postgis.jdbc.PGgeometry;
+import org.geotools.geometry.jts.CircularString;
+import org.geotools.geometry.jts.CurvedGeometryFactory;
+import org.geotools.geometry.jts.JTSFactoryFinder;
+import org.geotools.geometry.jts.WKTReader2;
 import org.hibernate.spatial.dialect.postgis.PGGeographyJdbcType;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.LineString;
+import org.locationtech.jts.geom.MultiLineString;
 import org.locationtech.jts.geom.Polygon;
 import org.locationtech.jts.io.ParseException;
 import org.locationtech.jts.io.WKBReader;
@@ -53,16 +60,28 @@ public class GeoController {
 		return service.findAround2(lat, lon, distanceM);
 	}
 
+	// localhost:8980/queryforlist/43
 	@GetMapping( "/queryforlist/{id}")
 	public String getCityNear2( @PathVariable int id) {
-		List<Map<String, Object>> objects = queryListByJdbcTemplate.readData( id);
+		GeometryFactory geometryFactory = JTSFactoryFinder.getGeometryFactory();
+		CurvedGeometryFactory curvedfactory = new CurvedGeometryFactory(Double.MAX_VALUE);
+		WKTReader2 reader2 = new WKTReader2(curvedfactory);
+		// Try 1: List<Map<String, Object>> objects = queryListByJdbcTemplate.readData( id);
+		List<Map<String, Object>> objects = queryListByJdbcTemplate.readDataGeometryAsText( id);
 		objects.forEach( r -> {
-			PGobject geometryObject = (PGobject) r.get( "geometry");
+			// Try 1: This does not work:
+			// PGobject geometryObject = (PGobject) r.get( "geometry");
 			// Gives: unknow wkbtype 8: byte[] geom = WKBReader.hexToBytes( geometryObject.getValue() );
+			// PGgeometry geo = new PGgeometry(geometryObject.getValue());
+
+			// Try 2:
             try {
-				PGgeometry geo = new PGgeometry(geometryObject.getValue());
-                log.info( "Geometry: {}", geo.getValue());
-            } catch (Exception e) {
+				String geometryString = (String) r.get("st_astext");
+				CircularString arc = (CircularString) reader2.read( geometryString);
+                log.info( "Geometry: {}", arc);
+				LineString linearizedCurve = arc.linearize();
+				log.info( "Linearized: {}", linearizedCurve);
+			} catch (Exception e) {
                 throw new RuntimeException(e);
             }
 		});

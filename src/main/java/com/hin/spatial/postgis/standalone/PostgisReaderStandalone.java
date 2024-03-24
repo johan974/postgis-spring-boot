@@ -38,7 +38,7 @@ public class PostgisReaderStandalone {
                  * Retrieve the geometry as an object then cast it to the geometry type.
                  * Print things out.
                  */
-                PGgeometry geom = (PGgeometry)r.getObject(2);
+                PGgeometry geom = (PGgeometry)r.getObject(2); // --> gives Unknown Geometry Type: 8
                 int id = r.getInt(1);
                 System.out.println("Row " + id + ":");
                 System.out.println(geom.toString());
